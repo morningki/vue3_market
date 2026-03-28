@@ -17,13 +17,23 @@ export default defineConfig({
     }),
     // 自动导入Element Plus组件，不用手动import
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver({importStyle:"sass"})],
     }),
   ],
   resolve: {
     //实际路径转换
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+    }
   },
+  css:{
+    preprocessorOptions:{
+      scss:{
+        //自动导入定制化样式文件进行覆盖
+        additionalData:`
+        @use "@/styles/element/index.scss" as *;
+        `,
+      }
+    }
+  }
 })

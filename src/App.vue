@@ -1,14 +1,17 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
   <!-- 一级路由出口 -->
    <RouterView />
+   <div>test scss</div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.test{
+  color:$priceColor;
+}
 .button-example {
   display: flex;
   flex-direction: column;

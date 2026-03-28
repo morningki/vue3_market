@@ -30,9 +30,9 @@ export default defineConfig({
     preprocessorOptions:{
       scss:{
         //自动导入定制化样式文件进行覆盖
-        additionalData:`
-        @use "@/styles/element/index.scss" as *;
-        `,
+        additionalData:
+        `@use "@/styles/element/index.scss" as *;`
+        `@import "@/styles/common.scss";`
       }
     }
   }

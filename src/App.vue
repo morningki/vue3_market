@@ -4,16 +4,8 @@ import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
-  <div class="button-example">
-    <div class="button-row">
-      <el-button disabled>Default</el-button>
-      <el-button type="primary">Primary</el-button>
-      <el-button type="success" disabled>Success</el-button>
-      <el-button type="info" disabled>Info</el-button>
-      <el-button type="warning" disabled>Warning</el-button>
-      <el-button type="danger" disabled>Danger</el-button>
-    </div>
-  </div>
+  <!-- 一级路由出口 -->
+   <RouterView />
 </template>
 
 <style scoped>

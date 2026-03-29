@@ -5,11 +5,10 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <!-- 一级路由出口 -->
    <RouterView />
-   <div>test scss</div>
 </template>
 
 <style scoped lang="scss">
-.test{
+.test {
   color:$priceColor;
 }
 .button-example {

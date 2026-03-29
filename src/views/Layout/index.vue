@@ -3,7 +3,7 @@
   <!-- 二级路由出口 -->
   <LayoutNav/>
   <LayoutHeader/>
-   <RouterView></RouterView>
+  <RouterView/>
   <LayoutFooter/>
 </template>
 

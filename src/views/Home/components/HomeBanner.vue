@@ -1,12 +1,7 @@
 <script setup>
-import { getBannerApi } from '@/apis/home';
-import { ref } from 'vue'
 import { onMounted } from 'vue';
-const bannerList = ref([])
-const getBanner = async() => {
-    const res = await getBannerApi()
-    bannerList.value = res.result
-}
+import { useBanner } from '@/hooks/useBanner'
+const { bannerList,getBanner } = useBanner()
 onMounted(() => {
     getBanner()
 })

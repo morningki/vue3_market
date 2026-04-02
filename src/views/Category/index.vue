@@ -1,11 +1,173 @@
-<template>
-  <div>我是分类</div>
-</template>
+<script setup>
+import { onMounted } from "vue";
+import { onBeforeRouteUpdate } from "vue-router";
+import { useBanner } from "@/hooks/useBanner";
+import goodsItem from "@/views/Home/components/goodsItem.vue";
+import { useCategory } from "@/hooks/useCategory";
+const { getUrlCategory, CategoryList, route } = useCategory();
+onMounted(() => getUrlCategory(route.params.id));
 
-<script setup lang="ts">
+// // ✅ 核心：监听路由 id 变化，重新获取数据
+// watch(
+//   ！！！watch的第一个参数本来应该是变量
+//   ！！但是这里是深层次的数据
+//   只要是 “对象。属性” 形式的响应式数据，都要写成函数返回！
+//   () => route.params.id,  // 监听的目标：路由id
 
+//   () => {
+//     // id 变化 → 重新加载数据
+//     getUrlCategory();
+//   },
+//   // 可选：首次加载就立即执行一次
+//   { immediate: false }
+// );
+const { bannerList, getBanner } = useBanner();
+onMounted(() => getBanner({ distributionSite: "2" }));
+//这里用路由守卫的写法，watch和watchEffect亦可
+onBeforeRouteUpdate((to) => {
+  getUrlCategory(to.params.id);
+  getBanner(to.params.id);
+});
+
+//这边解构约等于是 用一个变量接住了这个函数
+// watchEffect(() =>{
+//   getUrlCategory()
+//   getBanner()
+// })
 </script>
 
-<style scoped>
+<template>
+  <div class="top-category">
+    <div class="container m-top-20">
+      <!-- 面包屑 -->
+      <div class="bread-container">
+        <el-breadcrumb separator=">">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
 
+          <el-breadcrumb-item>{{ CategoryList.name }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+
+      <div class="home-banner">
+        <el-carousel height="500px">
+          <el-carousel-item v-for="item in bannerList" :key="item.id">
+            <img :src="item.imgUrl" alt="" />
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+      <div class="sub-list">
+        <h3>全部分类</h3>
+
+        <ul>
+          <li v-for="i in CategoryList.children" :key="i.id">
+            <RouterLink :to="`/category/subcategory/${i.id}`">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ref-goods" v-for="item in CategoryList.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+
+        <div class="body">
+          <goodsItem v-for="good in item.goods" :goods="good" :key="good.id" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.top-category {
+  h3 {
+    font-size: 28px;
+    color: #666;
+    font-weight: normal;
+    text-align: center;
+    line-height: 100px;
+  }
+
+  .sub-list {
+    margin-top: 20px;
+    background-color: #fff;
+
+    ul {
+      display: flex;
+      padding: 0 32px;
+      flex-wrap: wrap;
+
+      li {
+        width: 168px;
+        height: 160px;
+
+        a {
+          text-align: center;
+          display: block;
+          font-size: 16px;
+
+          img {
+            width: 100px;
+            height: 100px;
+          }
+
+          p {
+            line-height: 40px;
+          }
+
+          &:hover {
+            color: $xtxColor;
+          }
+        }
+      }
+    }
+  }
+
+  .ref-goods {
+    background-color: #fff;
+    margin-top: 20px;
+    position: relative;
+
+    .head {
+      .xtx-more {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .tag {
+        text-align: center;
+        color: #999;
+        font-size: 20px;
+        position: relative;
+        top: -20px;
+      }
+    }
+
+    .body {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 40px 30px;
+    }
+  }
+
+  .bread-container {
+    padding: 25px 0;
+  }
+
+  .home-banner {
+    width: 1240px;
+    height: 500px;
+    margin: 0 auto;
+    z-index: 98;
+
+    img {
+      width: 100%;
+      height: 500px;
+    }
+  }
+}
 </style>

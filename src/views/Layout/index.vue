@@ -4,6 +4,8 @@
   <LayoutNav/>
   <LayoutHeader/>
   <RouterView/>
+  <!-- <RouterView :key="$route.fullPath"/> -->
+  <!-- 所有以 $ 开头的，都是 Vue/Vue Router 内置的全局属性 / 方法，是框架约定好的，不是自定义的 -->
   <LayoutFooter/>
 </template>
 

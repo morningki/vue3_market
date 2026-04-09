@@ -2,7 +2,7 @@
 import { getSubCategory, getSubCategoryApi } from "@/apis/category";
 import { onMounted, ref } from "vue";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
-import { watchEffect, watch } from "vue";
+// import { watchEffect, watch } from "vue";
 import goodsItem from "../Home/components/goodsItem.vue";
 const route = useRoute();
 
@@ -93,7 +93,7 @@ onBeforeRouteUpdate((to) => {
       <!-- 核心：无限滚动容器 -->
       <!-- 使用 v-infinite-scroll 触发加载 -->
       <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
-        <goodsItem v-for="goods in goodsListFilter" :goods="goods" :key="goods.id" />
+        <goodsItem v-for="goods in goodsListFilter" :goods="goods" :key="goods.id"> </goodsItem>
       </div>
     </div>
   </div>

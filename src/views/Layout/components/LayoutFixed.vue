@@ -1,15 +1,15 @@
 <script setup>
-import { useScroll } from '@vueuse/core';
-import { getCategoryAPI } from '@/apis/layout';
-import { ref } from 'vue'
-import { onMounted } from 'vue';
-import { useCategoryStore } from '@/stores/category';
-const { y } = useScroll(window)
-const  category = useCategoryStore()
+import { useScroll } from "@vueuse/core";
+import { getCategoryAPI } from "@/apis/layout";
+import { ref } from "vue";
+import { onMounted } from "vue";
+import { useCategoryStore } from "@/stores/categoryStore";
+const { y } = useScroll(window);
+const category = useCategoryStore();
 </script>
 
 <template>
-  <div class="app-header-sticky" :class="{ show:y>78 }">
+  <div class="app-header-sticky" :class="{ show: y > 78 }">
     <div class="container">
       <RouterLink class="logo" to="/" />
       <!-- 导航区域 -->

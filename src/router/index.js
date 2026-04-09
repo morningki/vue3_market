@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { getOrderApi } from '@/apis/pay'
 const router = createRouter({
   history:createWebHistory(),
   //path和components对应关系位置
@@ -20,8 +20,23 @@ const router = createRouter({
         {
             path:'category/subcategory/:id',
             component:() => import('@/views/SubCategory/index.vue')
-          }
-
+          },
+            {
+          path: 'detail/:id',
+          component: () => import('@/views/Detail/index.vue')
+        },
+        {
+          path:'cartlist',
+          component:() => import('@/views/CartList/index.vue')
+        },
+        {
+          path:'checkout',
+          component:() => import('@/views/Checkout/index.vue')
+        },
+        {
+          path:'pay',
+          component:() => import('@/views/Pay/index.vue'),
+         }
     ]
     },
     {

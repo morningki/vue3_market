@@ -2,7 +2,8 @@
 import { getCategoryAPI } from "@/apis/layout";
 import { onMounted } from "vue";
 import { ref } from "vue";
-import { useCategoryStore } from "@/stores/category";
+import { useCategoryStore } from "@/stores/categoryStore";
+import HeaderCart from "./HeaderCart.vue";
 const category = useCategoryStore();
 </script>
 
@@ -15,7 +16,9 @@ const category = useCategoryStore();
 
       <ul class="app-header-nav">
         <li class="home" v-for="item in category.categoryList" :key="item.id">
-          <RouterLink active-class="active" :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+          <RouterLink active-class="active" :to="`/category/${item.id}`">{{
+            item.name
+          }}</RouterLink>
         </li>
       </ul>
 
@@ -26,6 +29,7 @@ const category = useCategoryStore();
       </div>
 
       <!-- 头部购物车 -->
+      <HeaderCart> </HeaderCart>
     </div>
   </header>
 </template>

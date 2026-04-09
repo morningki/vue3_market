@@ -14,8 +14,11 @@
   "dependencies": {
     "@vueuse/core": "^14.2.1",
     "axios": "^1.14.0",
+    "dayjs": "^1.11.20",
     "element-plus": "^2.13.6",
     "pinia": "^3.0.4",
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "timejs": "^1.0.0",
     "vue": "^3.5.30",
     "vue-router": "^5.0.3"
   },

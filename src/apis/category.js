@@ -26,3 +26,12 @@ export const getSubCategoryApi = (data) =>{
     data
   })
 }
+
+export const getDetail = (id) =>{
+  return httpInstance({
+    url:'/goods',
+    params:{
+      id
+    }
+  })
+}

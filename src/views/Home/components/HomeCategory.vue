@@ -1,8 +1,8 @@
 <script setup>
-import { useCategoryStore } from '@/stores/category';
-import { storeToRefs } from 'pinia';
-const goodCategory = useCategoryStore()
-const { categoryList } = storeToRefs(goodCategory)
+import { useCategoryStore } from "@/stores/categoryStore";
+import { storeToRefs } from "pinia";
+const goodCategory = useCategoryStore();
+const { categoryList } = storeToRefs(goodCategory);
 </script>
 
 <template>
@@ -11,7 +11,9 @@ const { categoryList } = storeToRefs(goodCategory)
       <li v-for="item in categoryList" :key="item.id">
         <RouterLink to="/">{{ item.name }}</RouterLink>
 
-        <RouterLink v-for="i in item.children.slice(0,2)" :key="i.id" to="/">{{ i.name }}</RouterLink>
+        <RouterLink v-for="i in item.children.slice(0, 2)" :key="i.id" to="/">{{
+          i.name
+        }}</RouterLink>
 
         <!-- 弹层layer位置 -->
         <div class="layer">
@@ -29,27 +31,17 @@ const { categoryList } = storeToRefs(goodCategory)
                   <p class="desc ellipsis">{{ i.desc }}</p>
 
                   <p class="price"><i>¥</i>{{ i.price }}</p>
-
                 </div>
-
               </RouterLink>
-
             </li>
-
           </ul>
-
         </div>
-
       </li>
-
     </ul>
-
   </div>
-
 </template>
 
-
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .home-category {
   width: 250px;
   height: 500px;

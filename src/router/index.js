@@ -36,6 +36,20 @@ const router = createRouter({
         {
           path:'pay',
           component:() => import('@/views/Pay/index.vue'),
+         },
+          {
+          path:'member',
+          component:() => import('@/views/Member/index.vue'),
+          children:[
+            {
+              path:'',
+              component:() => import('@/views/Member/components/userInfo.vue')
+            },
+            {
+              path:'useorder',
+               component:() => import('@/views/Member/components/userOrder.vue')
+            }
+          ]
          }
     ]
     },

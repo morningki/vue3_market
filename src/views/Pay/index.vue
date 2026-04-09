@@ -4,28 +4,16 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useCountDown } from "@/hooks/useCountdown.js";
 const { start, formatTime } = useCountDown();
-const payInfo = ref([]);
 const route = useRoute();
-const loading = ref(true) // 1. 定义 loading 状态，默认 true
-const orderApi = async () => {
-   loading.value = true // 确保请求前是 true
-  try {
-    const res = await getOrderApi(route.query.id)
-    payInfo.value = res.result
-    start(payInfo.value.countdown)
-  } finally {
-    // 2. 无论请求成功还是失败，最后都关闭 loading
-    loading.value = false
-  }
-}
+const res = await getOrderApi(route.query.id);
+const payInfo = res.result;
+start(payInfo.countdown);
 
 // 支付地址
 const baseURL = "http://pcapi-xiaotuxian-front-devtest.itheima.net/";
 const backURL = "http://127.0.0.1:5173/paycallback";
 const redirectUrl = encodeURIComponent(backURL);
 const payUrl = `${baseURL}pay/aliPay?orderId=${route.query.id}&redirect=${redirectUrl}`;
-
-onMounted(() => orderApi());
 </script>
 
 <template>
